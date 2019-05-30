@@ -30,4 +30,23 @@ class AppStatisticsResource @Autowired constructor(val repository: AppStatistics
     {
         return repository.findAll()
     }
+
+    @RequestMapping("/save")
+    fun saveRawStat(@RequestParam("id") id: String,
+                    @RequestParam("reptime") @DateTimeFormat(pattern = "MM/dd/yyyy") reportTime: Date,
+                    @RequestParam("type") type: Int, @RequestParam("vidreq") videoRequests: Int,
+                    @RequestParam("webreq") webViewRequests: Int, @RequestParam("vidclick") videoClicks: Int,
+                    @RequestParam("webclick") webViewClicks: Int, @RequestParam("vidins") videoInstalls: Int,
+                    @RequestParam("webins") webViewInstalls: Int)
+    {
+        val appRawStat = AppStatistics(id, reportTime, type, videoRequests, webViewRequests, videoClicks, webViewClicks,
+                videoInstalls, webViewInstalls)
+        repository.save(appRawStat)
+    }
+
+    @RequestMapping("/delete")
+    fun deleteRawStat(@RequestParam("id") id: String)
+    {
+        repository.deleteById(id)
+    }
 }
