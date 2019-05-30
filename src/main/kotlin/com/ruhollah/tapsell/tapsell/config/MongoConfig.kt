@@ -2,10 +2,13 @@ package com.ruhollah.tapsell.tapsell.config
 
 import com.ruhollah.tapsell.tapsell.document.AppStatistics
 import com.ruhollah.tapsell.tapsell.repository.AppStatisticsRepository
+import com.ruhollah.tapsell.tapsell.resource.AppStatisticsResource
 import com.ruhollah.tapsell.tapsell.service.AppStatisticsService
+import com.ruhollah.tapsell.tapsell.service.AppStatisticsServiceImpl
 import org.springframework.boot.CommandLineRunner
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 import java.text.SimpleDateFormat
@@ -13,6 +16,7 @@ import java.text.SimpleDateFormat
 @Configuration
 @EnableMongoRepositories(basePackageClasses = [AppStatisticsRepository::class])
 @EnableCaching
+@ComponentScan(basePackageClasses = [AppStatisticsResource::class, AppStatisticsServiceImpl::class])
 class MongoConfig
 {
 
