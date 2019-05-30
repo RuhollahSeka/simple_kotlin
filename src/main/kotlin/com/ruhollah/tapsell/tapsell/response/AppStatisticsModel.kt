@@ -15,7 +15,7 @@ class AppStatisticsModel(stat: AppStatistics) : Serializable
 
     init
     {
-        val statDate = stat.id.reportTime
+        val statDate = stat.reportTime
         val locale = ULocale("fa_IR@calendar=persian")
         val calendar = Calendar.getInstance(locale)
         calendar.timeInMillis = statDate.time
@@ -35,7 +35,7 @@ class AppStatisticsModel(stat: AppStatistics) : Serializable
     {
         val locale = ULocale("fa_IR@calendar=persian")
         val calendar = Calendar.getInstance(locale)
-        calendar.timeInMillis = stat.id.reportTime.time
+        calendar.timeInMillis = stat.reportTime.time
         return calendar[Calendar.YEAR] == this.year && ((calendar[Calendar.DAY_OF_YEAR] - 1) / 7) + 1 == this.weekNum
     }
 }

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface AppStatisticsRepository : MongoRepository<AppStatistics, AppStatistics.AppStatisticsKey>
+interface AppStatisticsRepository : MongoRepository<AppStatistics, String>
 {
-    fun findById_TypeEqualsAndId_ReportTimeBetweenOrderById_ReportTimeAsc(type: Int, startDate: Date,
-                                                                          endDate: Date) : List<AppStatistics>
+    fun findByTypeEqualsAndReportTimeBetweenOrderByReportTimeAsc(type: Int, startDate: Date,
+                                                                 endDate: Date) : List<AppStatistics>
 
 }

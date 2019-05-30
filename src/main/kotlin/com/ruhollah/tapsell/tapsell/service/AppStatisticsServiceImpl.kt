@@ -15,7 +15,7 @@ class AppStatisticsServiceImpl @Autowired constructor(val repository: AppStatist
     {
         println("Not getting from cache")
         val resultStats = AppStatisticsListResponse()
-        val rawStats = repository.findById_TypeEqualsAndId_ReportTimeBetweenOrderById_ReportTimeAsc(type, startDate, endDate)
+        val rawStats = repository.findByTypeEqualsAndReportTimeBetweenOrderByReportTimeAsc(type, startDate, endDate)
         rawStats.forEach {resultStats.addStat(it)}
         return resultStats
     }
