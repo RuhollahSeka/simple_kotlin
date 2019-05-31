@@ -1,4 +1,4 @@
-package com.ruhollah.tapsell.tapsell.resource
+package com.ruhollah.tapsell.tapsell.controller
 
 import com.ruhollah.tapsell.tapsell.document.AppStatistics
 import com.ruhollah.tapsell.tapsell.repository.AppStatisticsRepository
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-class AppStatisticsResource @Autowired constructor(val repository: AppStatisticsRepository,
-                                                   val service: AppStatisticsService)
+class AppStatisticsController @Autowired constructor(val repository: AppStatisticsRepository,
+                                                     val service: AppStatisticsService)
 {
     @RequestMapping("/stats", method = [RequestMethod.GET])
     fun getStats(@RequestParam("type") type: Int,

@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat
 @RunWith(SpringRunner::class)
 @ContextConfiguration(classes = [MongoConfig::class])
 @WebMvcTest
-class TapsellApplicationTests
+class AppUnitTest
 {
     @Autowired
     lateinit var mockMvc: MockMvc
