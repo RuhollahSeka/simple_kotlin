@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat
 @RunWith(SpringRunner::class)
 @ContextConfiguration(classes = [MongoConfig::class])
 @SpringBootTest(classes = [TapsellApplication::class]) // OMG
-class MongoSliceIntegrationTest
+class AppIntegrationTest
 {
     private lateinit var mockMvc: MockMvc
     private val format = SimpleDateFormat("MM/dd/yyyy")
