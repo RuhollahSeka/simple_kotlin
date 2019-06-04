@@ -19,7 +19,7 @@ class AppStatistics(@Id val id: String,
     override fun equals(other: Any?): Boolean
     {
         val otherStat: AppStatistics = other as AppStatistics
-        return otherStat.id == this.id && otherStat.reportTime.equals(this.reportTime) && otherStat.type == this.type
+        return otherStat.id == this.id && otherStat.reportTime == this.reportTime && otherStat.type == this.type
                 && otherStat.videoClicks == this.videoClicks && otherStat.videoInstalls == this.videoInstalls
                 && otherStat.videoRequests == this.videoRequests && otherStat.webViewClicks == this.webViewClicks
                 && otherStat.webViewInstalls == this.webViewInstalls && otherStat.webViewRequest == this.webViewRequest

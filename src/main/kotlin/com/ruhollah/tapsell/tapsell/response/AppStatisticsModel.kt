@@ -2,10 +2,10 @@ package com.ruhollah.tapsell.tapsell.response
 
 import com.ibm.icu.util.Calendar
 import com.ibm.icu.util.ULocale
-import com.ruhollah.tapsell.tapsell.document.AppStatistics
+import com.ruhollah.tapsell.tapsell.repository.ImportantAppStatistics
 import java.io.Serializable
 
-class AppStatisticsModel(stat: AppStatistics) : Serializable
+class AppStatisticsModel(stat: ImportantAppStatistics) : Serializable
 {
     val weekNum: Int
     val year: Int
@@ -24,14 +24,14 @@ class AppStatisticsModel(stat: AppStatistics) : Serializable
         updateStats(stat)
     }
 
-    fun updateStats(stat: AppStatistics)
+    fun updateStats(stat: ImportantAppStatistics)
     {
         this.requests += stat.videoRequests + stat.webViewRequest
         this.clicks += stat.videoClicks + stat.webViewClicks
         this.installs += stat.videoInstalls + stat.webViewInstalls
     }
 
-    fun sameWeekWith(stat: AppStatistics): Boolean
+    fun sameWeekWith(stat: ImportantAppStatistics): Boolean
     {
         val locale = ULocale("fa_IR@calendar=persian")
         val calendar = Calendar.getInstance(locale)
