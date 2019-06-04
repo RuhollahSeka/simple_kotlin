@@ -35,7 +35,6 @@ class AppIntegrationTest
     @Autowired
     lateinit var wac: WebApplicationContext
 
-    @Test
     @Before
     fun before()
     {
@@ -54,7 +53,6 @@ class AppIntegrationTest
     }
 
     @After
-    @Test
     fun after()
     {
         val resultActions = mutableListOf<ResultActions>()

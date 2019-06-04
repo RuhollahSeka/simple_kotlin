@@ -5,6 +5,7 @@ import com.ibm.icu.util.ULocale
 import com.ruhollah.tapsell.tapsell.config.MongoConfig
 import com.ruhollah.tapsell.tapsell.document.AppStatistics
 import com.ruhollah.tapsell.tapsell.repository.AppStatisticsRepository
+import com.ruhollah.tapsell.tapsell.repository.ImportantAppStatistics
 import com.ruhollah.tapsell.tapsell.response.AppStatisticsListResponse
 import com.ruhollah.tapsell.tapsell.response.AppStatisticsModel
 import com.ruhollah.tapsell.tapsell.service.AppStatisticsService
@@ -15,6 +16,7 @@ import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
@@ -37,8 +39,11 @@ class AppUnitTest
     @MockBean
     lateinit var service: AppStatisticsService
 
+    @MockBean
+    lateinit var operations: MongoOperations
+
     @Test
-    fun contextLoads()
+    fun testRepository()
     {
         val format = SimpleDateFormat("MM/dd/yyyy")
         val date1 = format.parse("01/01/2006")
@@ -73,21 +78,21 @@ class AppUnitTest
         val weekNum2 = ((calendar2[Calendar.DAY_OF_YEAR] - 1) / 7) + 1
 
         val appResponse = AppStatisticsListResponse()
-        val model1 = AppStatisticsModel(AppStatistics("", date1, 1, 1, 1, 1,
+        val model1 = AppStatisticsModel(ImportantAppStatistics(date1, 1, 1, 1,
                 1, 1, 1))
-        val model2 = AppStatisticsModel(AppStatistics("", date2, 1, 1, 1, 1,
+        val model2 = AppStatisticsModel(ImportantAppStatistics(date2, 1, 1, 1,
                 1, 1, 1))
         appResponse.stats.add(model1)
         appResponse.stats.add(model2)
 
-        Mockito.`when`(service.getStats(format.parse("01/01/2000"), format.parse("01/01/2100"), 1))
+        Mockito.`when`(service.getStats(format.parse("01/02/2000"), format.parse("01/02/2100"), 1))
                 .thenReturn(
                         appResponse
                 )
 
         val statsResultActions = mockMvc.perform(MockMvcRequestBuilders.get("/stats")
-                .param("type", "1").param("startDate", "01/01/2000")
-                .param("endDate", "01/01/2100").accept(MediaType.APPLICATION_JSON))
+                .param("type", "1").param("startDate", "01/02/2000")
+                .param("endDate", "01/02/2100").accept(MediaType.APPLICATION_JSON))
         statsResultActions.andExpect(status().isOk).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.stats[0].weekNum", `is`(weekNum1)))
                 .andExpect(jsonPath("$.stats[0].year", `is`(calendar1[Calendar.YEAR])))
